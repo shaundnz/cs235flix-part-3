@@ -1,0 +1,3 @@
+username,password
+shaunp,pbkdf2:sha256:150000$EpAvJYgG$85865141a61ae636b4e3bd1fb1843be151a0160643050e4e526a1839bf0046ad
+fellowuser,pbkdf2:sha256:150000$bBzmdfkV$e3edf92ecfeafa0025aef99d50b58c954388d9248384e1a11cdd5cc19f560be8

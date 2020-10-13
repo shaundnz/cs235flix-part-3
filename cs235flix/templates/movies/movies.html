@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<main id="main">
+    <h1>{{ movies_page_title }}</h1>
+     <nav class="nav-buttons">
+        <div>
+            {% if first_movie_url is not none %}
+                <button onclick="location.href='{{first_movie_url}}'">First</button>
+            {% else %}
+                <button disabled>First</button>
+            {% endif %}
+            {% if prev_movie_url is not none %}
+                <button onclick="location.href='{{prev_movie_url}}'">Previous</button>
+            {% else %}
+                <button disabled>Previous</button>
+            {% endif %}
+        </div>
+        <div>
+            {% if next_movie_url is not none %}
+                <button onclick="location.href='{{next_movie_url}}'">Next</button>
+            {% else %}
+                <button disabled>Next</button>
+            {% endif %}
+            {% if last_movie_url is not none %}
+                <button onclick="location.href='{{last_movie_url}}'">Last</button>
+            {% else %}
+                <button disabled>Last</button>
+            {% endif %}
+        </div>
+     </nav>
+    <div id="movie-cards-panel">
+    {% for movie in movies %}
+        <div class="movie-card">
+            <div class="poster">
+                <img src="{{ movie['poster_url'] }}" alt="{{ movie['title'] + 'poster' }}">
+            </div>
+            <div class="movie-title">
+                <h3>{{movie['title']}} ({{movie['release_year']}})</h3>
+            </div>
+            <div class="movie-details">
+                <h3>{{movie['title']}} ({{movie['release_year']}})</h3>
+                <p>Directed by: {{movie['director']}}</p>
+                <p>{{movie['genres'] }}</p>
+                {% if movie['description']|length > 150 %}
+                    <p>{{movie['description'][:200] + "..."}}</p>
+                {% else %}
+                    <p>{{movie['description']}}</p>
+                {% endif %}
+
+                {{movie['actors']}}
+            </div>
+            <a class="click-card-link" href="{{ movie['add_review_url'] }}"></a>
+        </div>
+    {% endfor %}
+    </div>
+</main>
+
+{% endblock %}

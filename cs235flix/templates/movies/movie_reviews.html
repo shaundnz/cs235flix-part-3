@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main id="main">
+    <div id="movie-page">
+            <div id="movie-details">
+                <h1>{{movie['title']}}</h1>
+                <h5>{{movie['release_year']}} | {{movie['genres']|join(', ')}}</h5>
+                <p>{{movie['description']}}</p>
+                <p>Directed by: {{movie['director']}}</p>
+                <p>Starring: {{movie['actors']|join(', ')}}</p>
+
+                <h3>Reviews ({{movie['reviews']|length}}) </h3>
+                {% if movie['reviews']|length == 0 %}
+                    <p>No reviews yet, be the first!</p>
+                {% else %}
+                    {% for review in movie['reviews'] %}
+                        <p>{{review}}</p>
+                    {% endfor %}
+                {%endif %}
+                <h3>Add review:</h3>
+                {% if 'username' not in session %}
+                    <p>You must be logged in to post a review.</p>
+                {% else %}
+                    <div id="review-form">
+                        <form method="post">
+                            {{form.csrf_token}}
+                            {{form.movie_title}}
+                            {{form.movie_release_year}}
+                            <div>
+                            {{form.review_rating.label}}
+                            {{form.review_rating}}
+                            </div>
+                            <div>
+                            {{form.review_text.label}}
+                            {{form.review_text}}
+                            </div>
+                            {{form.submit}}
+                        </form>
+                        {% for error in form.review_rating.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div id="movie-image">
+                <img src={{movie['poster_url']}}>
+            </div>
+        </div>
+</main>
+
+{% endblock %}

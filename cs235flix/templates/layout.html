@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CS235FLIX</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+<input type="checkbox" id="sidebar-toggle">
+
+<header id="main-header">
+    <div id="left-text">
+
+        {% if 'username' in session%}
+        Hello <span style="font-weight: bold; color: #BF0404">{{ session['username'] }}</span>!
+            <a href="{{ url_for('authentication_bp.logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('authentication_bp.login') }}">Login</a>
+        <a href="{{ url_for('authentication_bp.register') }}">Register</a>
+        {% endif %}
+        <label for="sidebar-toggle" id="sidebar-btn">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </label>
+    </div>
+
+    <div id="right-text">
+
+        <form action="{{ url_for('search_bp.search') }}">
+            <input id="search-box" type="text" placeholder="Find a movie.." name="q" required><button id="search-icon" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</header>
+
+
+
+<div id="content">
+
+    <div id="sidebar">
+        <a href="{{ url_for('home_bp.home') }}"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a>
+        <a href="{{ url_for('movies_bp.movies') }}"><i class="fa fa-film" aria-hidden="true"></i><span>Movies</span></a>
+        <a href="{{ url_for('genres_bp.genres') }}"><i class="fa fa-tags" aria-hidden="true"></i><span>Genres</span></a>
+    </div>
+
+    <div id="main-panel">
+        {% block content %} {% endblock %}
+    </div>
+
+</div>
+
+</body>
+</html>
