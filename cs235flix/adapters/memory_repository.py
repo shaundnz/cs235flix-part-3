@@ -188,6 +188,21 @@ def read_csv_file(data_path: str, movie_data_filename, repo: MemoryRepository):
                 Review(Movie(row['movie_title'], int(row['movie_year'])), row['review_text'], int(row['review_rating']),
                        row['username']), row['username'])
 
+    # Associate director, genre, actors with movies
+    all_movies = repo.get_all_movies()
+    for m in all_movies:
+        d = repo.get_director(m.director.director_full_name)
+        d.add_directed_movie(m)
+
+        movie_genres = m.genres
+        for g in movie_genres:
+            repo_genre = repo.get_genre(g.genre_name)
+            repo_genre.add_genre_movie(m)
+
+        movie_actors = m.actors
+        for a in movie_actors:
+            repo_actor = repo.get_actor(a.actor_full_name)
+            repo_actor.add_acted_in(m)
 
 def create_movie_instance(row):
     movie = Movie(row["Title"], int(row["Year"]))

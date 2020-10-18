@@ -7,10 +7,18 @@ class Actor:
         else:
             self.__actor_full_name = actor_full_name.strip()
         self.__colleagues = []
+        self.__acted_in = []
 
     @property
     def actor_full_name(self) -> str:
         return self.__actor_full_name
+
+    @property
+    def actor_acted_in(self):
+        return self.__acted_in
+
+    def add_acted_in(self, movie):
+        self.__acted_in.append(movie)
 
     def __repr__(self):
         return f"{self.__actor_full_name}"

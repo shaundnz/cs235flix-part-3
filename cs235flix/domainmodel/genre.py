@@ -8,9 +8,18 @@ class Genre:
         else:
             self.__genre_name = genre_name.strip()
 
+        self.__genre_movies = []
+
     @property
     def genre_name(self) -> str:
         return self.__genre_name
+
+    @property
+    def genre_movies(self):
+        return self.__genre_movies
+
+    def add_genre_movie(self, movie):
+        self.__genre_movies.append(movie)
 
     def __repr__(self):
         return f"{self.__genre_name}"

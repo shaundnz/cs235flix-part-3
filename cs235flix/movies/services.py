@@ -37,5 +37,5 @@ def get_number_pages_movies_for_genre(genre, results_per_page, repo: AbstractRep
 
 
 def add_review(movie_title, movie_release_year, review_text, review_rating, username, repo: AbstractRepository):
-    review = Review(Movie(movie_title, movie_release_year), review_text, review_rating, username)
+    review = Review(repo.get_movie(movie_title, movie_release_year), review_text, review_rating, username)
     repo.add_review(review, username)

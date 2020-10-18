@@ -8,9 +8,18 @@ class Director:
         else:
             self.__director_full_name = director_full_name.strip()
 
+        self.__directed_movies = []
+
     @property
     def director_full_name(self) -> str:
         return self.__director_full_name
+
+    @property
+    def director_directed_movies(self):
+        return self.__directed_movies
+
+    def add_directed_movie(self, movie):
+        self.__directed_movies.append(movie)
 
     def __repr__(self):
         return f"{self.__director_full_name}"
