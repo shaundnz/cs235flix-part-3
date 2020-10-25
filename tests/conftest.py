@@ -20,7 +20,8 @@ def client():
     my_app = create_app({
         'TESTING': True,
         'TEST_DATA_PATH': TEST_DATA_PATH,
-        'WTF_CSRF_ENABLED': False
+        'WTF_CSRF_ENABLED': False,
+        'REPOSITORY': 'memory'
     })
 
     return my_app.test_client()

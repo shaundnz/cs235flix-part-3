@@ -31,7 +31,12 @@ def create_app(test_config=None):
         populate(os.path.join(data_path), "Data100movies.csv", repo.repo_instance)
 
     if app.config['REPOSITORY'] == 'memory':
-        populate(os.path.join(data_path), "Data1000movies.csv", repo.repo_instance)
+        if test_config is not None:
+            data_path = app.config['TEST_DATA_PATH']
+            populate(os.path.join(data_path), "Data100movies.csv", repo.repo_instance)
+        else:
+            populate(os.path.join(data_path), "Data1000movies.csv", repo.repo_instance)
+
     elif app.config['REPOSITORY'] == 'database':
         # Configure database.
         database_uri = app.config['SQLALCHEMY_DATABASE_URI']
