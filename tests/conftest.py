@@ -39,6 +39,7 @@ def database_engine():
     for table in reversed(metadata.sorted_tables):  # Remove any data from the tables.
         engine.execute(table.delete())
     map_model_to_tables()
+    session_factory = sessionmaker(bind=engine)
     database_repository.populate(session_factory, TEST_DATA_PATH, "Data100Movies.csv")
     yield engine
     metadata.drop_all(engine)
