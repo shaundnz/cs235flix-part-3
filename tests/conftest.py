@@ -11,7 +11,7 @@ from cs235flix.adapters.memory_repository import MemoryRepository
 
 TEST_DATA_PATH = os.path.join('tests', 'data')
 TEST_DATABASE_URI_IN_MEMORY = 'sqlite://'
-TEST_DATABASE_URI_FILE = 'sqlite:///movies.db'
+TEST_DATABASE_URI_FILE = 'sqlite:///movies-test.db'
 
 @pytest.fixture
 def in_mem_repo():
